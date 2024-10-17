@@ -48,3 +48,7 @@ export default tseslint.config({
   },
 })
 ```
+
+Dependences:
+  npm i bootstrap@5.3.3
+  npm i -D react-router-dom@latest
