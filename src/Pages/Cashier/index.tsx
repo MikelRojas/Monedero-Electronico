@@ -1,4 +1,4 @@
-
+import Table from '../../components/Table'
 
 const Cashier = () => {
   return (
@@ -18,30 +18,7 @@ const Cashier = () => {
             </div>
         </form>
         <div className="d-flex flex-row mb-5">
-            <table className="table table-bordered">
-                <thead>
-                    <tr>
-                    <th scope="col">Codigo</th>
-                    <th scope="col">Producto</th>
-                    <th scope="col">Cantidad</th>
-                    <th scope="col">Monto</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row">1</th>
-                    <td>Mark</td>
-                    <td>Otto</td>
-                    <td>@mdo</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                </tbody>
-            </table>
+            <Table columns={["Codigo","Producto","Cantidad","Monto"]} data={[]} className='table table-bordered' styles={{}}/>
             <img src="/public/images/qr_default.png" className="img-fluid img_qr" alt="Your Qr"></img>
         </div>
         <form>
