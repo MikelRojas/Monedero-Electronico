@@ -17,6 +17,7 @@ const Inventory = () => {
           ...prevData,
           [id]: value // Actualiza el estado de acuerdo con el id del input
         }));
+        updateProducts();
       };
 
     function handleSubmit(e: FormEvent<HTMLFormElement>): void {

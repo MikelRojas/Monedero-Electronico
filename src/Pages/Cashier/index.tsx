@@ -1,7 +1,7 @@
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Table from '../../components/Table'
 import Qr from '../../components/Qr';
-import { getProducts } from '../../store';
+import { getNodeIndex, getProducts } from '../../store';
 
 
 
@@ -22,7 +22,16 @@ const Cashier = () => {
     }));
   }
 
-
+  const calculateTotal = ():number =>{
+    let total = 0.00;
+    console.log(products)
+    products.forEach((product) => {
+      if(typeof product[3] === "number" ){
+        total = total + (product[3]* formData.cantidad ); 
+      }     
+    });
+    return total
+  }
   function handleSubmit(e: FormEvent<HTMLFormElement>): void {
       e.preventDefault(); 
       setQr(`http://127.0.0.1:5000/respuesta_cliente?id=${formData.id_client}`);
@@ -36,13 +45,44 @@ const Cashier = () => {
             throw new Error('Error en la petición');
           }
           const result = await response.json();
-          console.log(result)
+          console.log(result);
+          if(result.estado){
+            const insertVenta = async () => {
+              const total = calculateTotal();
+              console.log(total)
+              const response = await fetch("http://127.0.0.1:5000/insertar_venta", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                  host: "localhost",
+                  dbname: "server_local",
+                  user: "postgres",
+                  password: "marr5604",
+                  port: "5432",
+                  id_client: formData.id_client,
+                  total: total,
+                  pay: total,
+                  nodo: getNodeIndex(),
+                  products:products
+                }),
+              });
+          
+              console.log(await response.json());
+          };
+          insertVenta();
+          setQr("");
+          }
         } catch (error: any) {
           console.log(error);
+          setQr("");
         } 
+        
       };
 
       fetchData();
+    
   }
 
   function handleAddProduct(e: FormEvent<HTMLFormElement>): void {
