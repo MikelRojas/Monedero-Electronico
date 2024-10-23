@@ -34,7 +34,12 @@ const Recharge = () => {
                 if (!response.ok) {
                 throw new Error('Error en la petición');
                 }
-                console.log(await response.json());
+                const result = await response.json();
+                if(result.success){
+                  alert("Recarga exitosa");
+                } else {
+                  alert("Recarga fallida");
+                }
             }
             setQr("");
           } catch (error: any) {

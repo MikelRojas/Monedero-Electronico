@@ -5,6 +5,7 @@ import Inventory from './Pages/Inventory';
 import RouterLayout from './common/RouterLayout' ;
 import Sign_in from './Pages/Sign-in';
 import Sign_up from './Pages/Sign-up';
+import Discounts from './Pages/Discounts';
 import { useEffect, useState } from "react";
 import { getNodeIndex } from './store/index';
 
@@ -24,6 +25,7 @@ const AppRouter = () =>{
               <Route path='/' element={<Cashier />} />
               <Route path='/recharge' element={<Recharge />} />
               <Route path='/inventory' element={<Inventory />} />
+              <Route path='/discounts' element={<Discounts />} />
             </Route>
           ) : (
             <>

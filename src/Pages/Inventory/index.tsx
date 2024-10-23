@@ -40,7 +40,12 @@ const Inventory = () => {
               }),
             });
         
-            console.log(await response.json());
+            const result = await response.json();
+            if(result.data === "Producto agregado con éxito."){
+              alert("Producto agregado con éxito.");
+            } else {
+                alert("Fallo al agregar producto.");
+            }
             updateProducts()
             setData(getProducts())
             setFormData({
@@ -83,6 +88,11 @@ const Inventory = () => {
                 <button type="submit" className="btn btn-primary p-2 btn_add">Agregar</button>
             </div>
         </form>
+          <button className="btn btn-primary p-2 mb-2" 
+          onClick={()=>{
+            updateProducts();
+            window.location.reload();
+          }}>Refrescar</button>
          <Table columns={["Codigo","Nombre","Precio","Stok"]} data={data} className='table table-bordered' styles={{}}/>
     </div>
   )

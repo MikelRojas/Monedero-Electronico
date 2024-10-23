@@ -69,7 +69,12 @@ const Cashier = () => {
                 }),
               });
           
-              console.log(await response.json());
+              const result = await response.json();
+              if(result.data === "Venta exitosa"){
+                alert("Venta exitosa");
+              } else {
+                alert("Venta fallida");
+              }
           };
           insertVenta();
           setQr("");
