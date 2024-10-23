@@ -4,7 +4,16 @@ import Qr from '../../components/Qr';
 import { getNodeIndex, getProducts } from '../../store';
 
 
-
+/**
+ * Componente de caja para manejar la venta de productos.
+ * Este componente permite agregar productos a una lista, calcular el total,
+ * y generar un código QR con la información del cliente.
+ * 
+ * @returns {JSX.Element} El componente de caja renderizado.
+ * 
+ * @example
+ * <Cashier />
+ */
 const Cashier = () => {
   const [qr,setQr] = useState<string>("");
   const [formData, setFormData] = useState({
@@ -14,6 +23,11 @@ const Cashier = () => {
   });
   const [products,setProducts] = useState<Array<Array<number | string>>|[]>([]);
 
+  /**
+   * Maneja los cambios en los inputs del formulario.
+   * 
+   * @param {ChangeEvent<HTMLInputElement>} e - El evento de cambio del input.
+   */
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const { id, value } = e.target; // Extrae el id y el valor del input
     setFormData((prevData) => ({
@@ -22,6 +36,11 @@ const Cashier = () => {
     }));
   }
 
+  /**
+   * Calcula el total de la venta.
+   * 
+   * @returns {number} El total calculado.
+   */
   const calculateTotal = ():number =>{
     let total = 0.00;
     console.log(products)
@@ -32,6 +51,12 @@ const Cashier = () => {
     });
     return total
   }
+
+  /**
+   * Maneja el envío del formulario para solicitar un código QR.
+   * 
+   * @param {FormEvent<HTMLFormElement>} e - El evento de envío del formulario.
+   */
   function handleSubmit(e: FormEvent<HTMLFormElement>): void {
       e.preventDefault(); 
       setQr(`http://127.0.0.1:5000/respuesta_cliente?id=${formData.id_client}`);
@@ -90,6 +115,11 @@ const Cashier = () => {
     
   }
 
+  /**
+   * Maneja el envío del formulario para agregar un producto.
+   * 
+   * @param {FormEvent<HTMLFormElement>} e - El evento de envío del formulario.
+   */
   function handleAddProduct(e: FormEvent<HTMLFormElement>): void {
     e.preventDefault(); 
     const shoppingList = [...products]; 

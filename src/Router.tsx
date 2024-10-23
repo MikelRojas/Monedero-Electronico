@@ -10,7 +10,19 @@ import { useEffect, useState } from "react";
 import { getNodeIndex } from './store/index';
 
 
-
+/**
+ * Componente de enrutador de la aplicación.
+ *
+ * Este componente maneja las rutas de la aplicación y determina si
+ * se debe mostrar la interfaz de usuario de inicio de sesión o las 
+ * páginas principales basadas en el estado de inicio de sesión.
+ *
+ * Utiliza `getNodeIndex` para verificar si el usuario está autenticado.
+ * Si está autenticado, renderiza las rutas principales. De lo contrario,
+ * renderiza las rutas de inicio de sesión y registro.
+ *
+ * @returns {JSX.Element} El enrutador de la aplicación con rutas configuradas.
+ */
 const AppRouter = () =>{
     const [login ,setLogin] = useState<boolean>(false);
     useEffect(() => {

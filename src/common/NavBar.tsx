@@ -1,5 +1,11 @@
-
-
+/**
+ * Componente de barra de navegación.
+ * Este componente utiliza Bootstrap para crear una barra de navegación responsiva
+ * que permite la navegación entre diferentes secciones de la aplicación.
+ * 
+ * @returns {JSX.Element} El componente de navegación renderizado.
+ * 
+ */
 const NavBar = () => {
   return (
     <div className="container">

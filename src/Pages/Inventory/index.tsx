@@ -12,10 +12,10 @@ const Inventory = () => {
     });
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const { id, value } = e.target; // Extrae el id y el valor del input
+        const { id, value } = e.target; 
         setFormData((prevData) => ({
           ...prevData,
-          [id]: value // Actualiza el estado de acuerdo con el id del input
+          [id]: value 
         }));
         updateProducts();
       };

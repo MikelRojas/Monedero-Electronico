@@ -1,28 +1,51 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 import { saveNodeIndex } from '../../store/index'
 
+/**
+ * Interfaz para el ID del nodo.
+ * @interface NodeID
+ * @property {number} id - ID del nodo.
+ */
 interface NodeID {
   id:number,
 }
 
 
+/**
+ * Componente para iniciar sesión en un nodo.
+ * Permite a los usuarios ingresar el nombre del nodo y la contraseña,
+ * y valida los datos con una API.
+ * 
+ * @returns {JSX.Element} El componente de inicio de sesión renderizado.
+ * 
+ * @example
+ * <Sign_in />
+ */
 const Sign_in = () => {
-  // Define el estado para almacenar el nombre de nodo y la contraseña
   const [formData, setFormData] = useState({
     nombreNodo: '',
     password: ''
   });
   const [error, setError] = useState<string | null>(null);
 
-  // Maneja los cambios en los inputs
+  /**
+   * Maneja los cambios en los inputs del formulario.
+   * 
+   * @param {ChangeEvent<HTMLInputElement>} e - El evento de cambio del input.
+   */
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { id, value } = e.target; // Extrae el id y el valor del input
+    const { id, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [id]: value // Actualiza el estado de acuerdo con el id del input
+      [id]: value 
     }));
   };
 
+   /**
+   * Maneja el envío del formulario de inicio de sesión.
+   * 
+   * @param {FormEvent<HTMLFormElement>} e - El evento de envío del formulario.
+   */
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault(); 
     console.log(formData); 

@@ -1,26 +1,39 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
+/**
+ * Componente para aplicar descuentos.
+ * Este componente permite a los usuarios ingresar la descripción,
+ * el porcentaje de descuento y la fecha de finalización para aplicar un descuento.
+ * 
+ * @returns {JSX.Element} El componente de descuentos renderizado.
+ * 
+ * @example
+ * <Discounts />
+ */
 const Discounts = () => {
     const [formData, setFormData] = useState({
         descripcion: '',
         descuento: 0,
-        fechaFin: '',  // Agrega la fecha de finalización al estado
+        fechaFin: '',  
     });
 
-    // Obtener la fecha de hoy en formato YYYY-MM-DD
     const today = new Date().toISOString().split('T')[0];
+
+    /**
+     * Maneja el envío del formulario para aplicar el descuento.
+     * 
+     * @param {FormEvent<HTMLFormElement>} event - El evento de envío del formulario.
+     */
 
     function handleSubmit(event: FormEvent<HTMLFormElement>): void {
         event.preventDefault();
 
-        // Validar que todos los campos necesarios estén completos
         if (!formData.descripcion || !formData.descuento || !formData.fechaFin) {
             alert("Por favor completa todos los campos");
             return;
         }
 
-        // Realizar la solicitud fetch para enviar los datos a la API
-        fetch('http://127.0.0.1:5000/insertar_promocion', {  // Cambia la URL según sea necesario
+        fetch('http://127.0.0.1:5000/insertar_promocion', {  
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +42,7 @@ const Discounts = () => {
                 descripcion: formData.descripcion,
                 porcentaje_descuento: formData.descuento,
                 fecha_fin: formData.fechaFin,
-                nodo_id: null,  // Aquí puedes pasar un nodo_id si es necesario, o null si es global
+                nodo_id: null,  
             }),
         })
         .then(response => response.json())
@@ -46,6 +59,11 @@ const Discounts = () => {
         });
     }
 
+    /**
+     * Maneja los cambios en los inputs del formulario.
+     * 
+     * @param {ChangeEvent<HTMLInputElement | HTMLTextAreaElement>} e - El evento de cambio del input.
+     */
     function handleChange(e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
         const { id, value } = e.target; // Extrae el id y el valor del input
         setFormData((prevData) => ({

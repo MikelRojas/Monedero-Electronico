@@ -1,5 +1,15 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 
+/**
+ * Componente para el registro de un nuevo nodo.
+ * Permite a los usuarios ingresar el nombre del nodo y la contraseña,
+ * y envía los datos a una API para su registro.
+ * 
+ * @returns {JSX.Element} El componente de registro renderizado.
+ * 
+ * @example
+ * <SignUp />
+ */
 const SignUp = () => {
   const [formData, setFormData] = useState({
     nombreNodo: '',
@@ -8,6 +18,11 @@ const SignUp = () => {
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState<string | null>(null);
 
+  /**
+   * Maneja los cambios en los inputs del formulario.
+   * 
+   * @param {ChangeEvent<HTMLInputElement>} e - El evento de cambio del input.
+   */
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prevData) => ({
@@ -16,6 +31,12 @@ const SignUp = () => {
     }));
   };
 
+  /**
+   * Maneja el envío del formulario de registro.
+   * Envía los datos a la API y maneja la respuesta.
+   * 
+   * @param {FormEvent<HTMLFormElement>} e - El evento de envío del formulario.
+   */
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const apiUrl = 'http://127.0.0.1:5000/registrar_nodo';

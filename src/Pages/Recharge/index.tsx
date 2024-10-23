@@ -1,6 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import Qr from "../../components/Qr";
 
+/**
+ * Componente para realizar recargas a clientes.
+ * Este componente permite a los usuarios ingresar el ID del cliente y el monto de la recarga,
+ * y genera un código QR con la información correspondiente.
+ * 
+ * @returns {JSX.Element} El componente de recarga renderizado.
+ * 
+ * @example
+ * <Recharge />
+ */
 const Recharge = () => {
     const [qr,setQr] = useState<string>("");
     const [formData, setFormData] = useState({
@@ -8,6 +18,11 @@ const Recharge = () => {
         monto:0.00,
       });
 
+      /**
+     * Maneja los cambios en los inputs del formulario.
+     * 
+     * @param {ChangeEvent<HTMLInputElement>} e - El evento de cambio del input.
+     */
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
         const { id, value } = e.target; // Extrae el id y el valor del input
         setFormData((prevData) => ({
@@ -16,6 +31,11 @@ const Recharge = () => {
         }));
     }
 
+    /**
+     * Maneja el envío del formulario para solicitar una recarga.
+     * 
+     * @param {FormEvent<HTMLFormElement>} e - El evento de envío del formulario.
+     */
     function handleSubmit(e: FormEvent<HTMLFormElement>): void {
         e.preventDefault(); 
         setQr(`http://127.0.0.1:5000/respuesta_cliente?id=${formData.id_client}`);
